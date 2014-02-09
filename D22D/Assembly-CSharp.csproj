@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Mob.cs" />
+     <Compile Include="Assets\Projectile.cs" />
      <Compile Include="Assets\Soldier.cs" />
   </ItemGroup>
   <ItemGroup>

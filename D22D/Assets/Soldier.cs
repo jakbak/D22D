@@ -3,11 +3,13 @@ using System.Collections;
 
 public class Soldier : MonoBehaviour {
 
+	public Transform projectilePrefab;
 	public GameObject opponent;
 
 	public int health = 100;
 
 	public int damage;
+	public float attackSpeed;
 	public double impactTime;
 
 	private bool impacted;
@@ -17,28 +19,30 @@ public class Soldier : MonoBehaviour {
 
 	public float meleeRange;
 
+
 	// Use this for initialization
 	void Start () 
 	{
-	
+		animation[attack.name].speed = attackSpeed/10;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		Debug.Log (health);
-		if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0) && inRange())
+		if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0))
 		{
 			animation.CrossFade(attack.name);
 			ClickToMove.attack = true;
 
-			if(opponent!=null)
+		
+			/**if(opponent!=null)
 			{
 				transform.LookAt (opponent.transform.position);
-			}
+			} **/
 		}
 
-		if(animation[attack.name].time>0.9*animation[attack.name].length)
+		if(animation[attack.name].time>0.8*animation[attack.name].length)
 		{
 			ClickToMove.attack = false;
 			impacted = false;
@@ -50,11 +54,14 @@ public class Soldier : MonoBehaviour {
 
 	void impact()
 	{
-		if(opponent!=null&&animation.IsPlaying(attack.name)&&!impacted)
+		if(animation.IsPlaying(attack.name)&&!impacted)
 		{
-			if(animation[attack.name].time>animation[attack.name].length*impactTime&&(animation[attack.name].time<0.9*animation[attack.name].length))
+			if(animation[attack.name].time>animation[attack.name].length*impactTime&&(animation[attack.name].time<0.8*animation[attack.name].length))
 			{
-				opponent.GetComponent<Mob>().getHit (damage);
+
+
+				Instantiate (projectilePrefab, transform.TransformPoint(Vector3.forward), transform.rotation);
+				//opponent.GetComponent<Mob>().getHit (damage);
 				impacted = true;
 			}
 		}

@@ -24,9 +24,9 @@ public class ClickToMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(!attack)
+		if(!attack&&!Input.GetKey (KeyCode.LeftShift))
 		{
-			if(Input.GetMouseButton(0))
+			if(Input.GetMouseButton(0)&&!Input.GetKey (KeyCode.LeftShift))
 			{
 			//Locate position of click
 				locatePosition();
@@ -35,9 +35,9 @@ public class ClickToMove : MonoBehaviour {
 			//Move player
 			moveToPosition();
 		}
-		else
+		if(attack)
 		{
-
+			rotateToMouse ();
 		}
 	}
 
@@ -51,7 +51,6 @@ public class ClickToMove : MonoBehaviour {
 			if(hit.collider.tag!="Player"&&hit.collider.tag!="Enemy")
 			{
 			position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-			Debug.Log (position);
 			}
 		}
 
@@ -78,5 +77,28 @@ public class ClickToMove : MonoBehaviour {
 
 			animation.CrossFade(Idle.name);
 		}
+	}
+
+	void rotateToMouse()
+	{
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		
+		if(Physics.Raycast (ray, out hit, 100))
+		{
+			if(hit.collider.tag!="Player")
+			{
+				position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+
+				Quaternion newRotation = Quaternion.LookRotation(position-transform.position);
+				
+				newRotation.x = 0f;
+				newRotation.z = 0f;
+				
+				transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime + 10);
+			}
+		}
+
+
 	}
 }
