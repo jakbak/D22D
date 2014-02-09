@@ -46,7 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ClickToMove.cs" />
+     <Compile Include="Assets\Mob.cs" />
+     <Compile Include="Assets\Soldier.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
