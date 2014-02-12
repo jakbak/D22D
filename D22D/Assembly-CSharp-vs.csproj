@@ -49,6 +49,7 @@
      <Compile Include="Assets\Mob.cs" />
      <Compile Include="Assets\Projectile.cs" />
      <Compile Include="Assets\Soldier.cs" />
+     <None Include="Assets\SkeletonData\animations.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

@@ -49,6 +49,7 @@
      <Compile Include="Assets\Mob.cs" />
      <Compile Include="Assets\Projectile.cs" />
      <Compile Include="Assets\Soldier.cs" />
+     <None Include="Assets\SkeletonData\animations.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
