@@ -25,6 +25,10 @@ public class Projectile : MonoBehaviour {
 			other.GetComponent<Mob>().getHit (damage);
 			Destroy (gameObject);
 		}
+		else
+		{
+			Destroy(gameObject);
+		}
 
 	}
 }

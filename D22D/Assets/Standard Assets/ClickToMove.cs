@@ -13,11 +13,14 @@ public class ClickToMove : MonoBehaviour {
 
 	public static bool attack;
 
+	private bool rotateMouse;
+
 	// Use this for initialization
 	void Start () {
 	
 		position = transform.position;
 
+		rotateMouse = true;
 
 	}
 	
@@ -37,6 +40,7 @@ public class ClickToMove : MonoBehaviour {
 		}
 		if(attack)
 		{
+			rotateMouse = true;
 			rotateToMouse ();
 		}
 	}
@@ -84,7 +88,7 @@ public class ClickToMove : MonoBehaviour {
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		
-		if(Physics.Raycast (ray, out hit, 100))
+		if(Physics.Raycast (ray, out hit, 100) &&rotateMouse)
 		{
 			if(hit.collider.tag!="Player")
 			{
@@ -99,6 +103,6 @@ public class ClickToMove : MonoBehaviour {
 			}
 		}
 
-
+		rotateMouse = false;
 	}
 }

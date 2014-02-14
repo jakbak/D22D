@@ -19,6 +19,8 @@ public class Soldier : MonoBehaviour {
 
 	public float meleeRange;
 
+	public float projectileOffset;
+	public bool isRanged;
 
 	// Use this for initialization
 	void Start () 
@@ -36,10 +38,10 @@ public class Soldier : MonoBehaviour {
 			ClickToMove.attack = true;
 
 		
-			/**if(opponent!=null)
+			if(opponent!=null&&!isRanged&&inRange ())
 			{
 				transform.LookAt (opponent.transform.position);
-			} **/
+			}
 		}
 
 		if(animation[attack.name].time>0.8*animation[attack.name].length)
@@ -58,10 +60,15 @@ public class Soldier : MonoBehaviour {
 		{
 			if(animation[attack.name].time>animation[attack.name].length*impactTime&&(animation[attack.name].time<0.8*animation[attack.name].length))
 			{
+				if(isRanged)
+				{
 
-
-				Instantiate (projectilePrefab, transform.TransformPoint(Vector3.forward), transform.rotation);
-				//opponent.GetComponent<Mob>().getHit (damage);
+				Instantiate (projectilePrefab, new Vector3(transform.position.x, transform.position.y+projectileOffset, transform.position.z), transform.rotation);
+				}
+				if(!isRanged&&inRange())
+				{
+				opponent.GetComponent<Mob>().getHit (damage);
+				}
 				impacted = true;
 			}
 		}

@@ -41,7 +41,7 @@ public class Mob : MonoBehaviour {
 			else
 			{
 				//animation.CrossFade(idle.name);
-				animation.CrossFade(attackClip.name);
+				animation.Play(attackClip.name);
 				attack();
 
 				if(animation[attackClip.name].time > 0.9*animation[attackClip.name].length)
@@ -80,9 +80,9 @@ public class Mob : MonoBehaviour {
 
 	void chase()
 	{
-		transform.LookAt (player.position);
+		transform.LookAt(player.position);
 		controller.SimpleMove(transform.forward*speed);
-		animation.CrossFade(run.name);
+		animation.Play(run.name);
 	}
 	void dieMethod()
 	{
