@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Soldier : MonoBehaviour {
@@ -14,7 +14,9 @@ public class Soldier : MonoBehaviour {
 
 	private bool impacted;
 
+	private float randomAttackNumber;
 	public AnimationClip attack;
+	public AnimationClip attack2;
 	public AnimationClip die;
 
 	public float meleeRange;
@@ -32,9 +34,19 @@ public class Soldier : MonoBehaviour {
 	void Update () 
 	{
 		Debug.Log (health);
+
+		randomAttackNumber = Mathf.Round ( Random.Range (1,2));
+
 		if(Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0))
 		{
-			animation.CrossFade(attack.name);
+			if(randomAttackNumber <= 1 )
+			{
+				animation.Play(attack.name);
+			}
+			else
+			{
+				animation.Play(attack2.name);
+			}
 			ClickToMove.attack = true;
 
 		

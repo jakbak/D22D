@@ -8,11 +8,11 @@ public class ClickToMove : MonoBehaviour {
 
 	public AnimationClip run;
 	public AnimationClip Idle;
-
+	
 	private Vector3 position;
 
 	public static bool attack;
-
+	
 	private bool rotateMouse;
 
 	// Use this for initialization
@@ -22,11 +22,14 @@ public class ClickToMove : MonoBehaviour {
 
 		rotateMouse = true;
 
+		animation[run.name].speed = 1000;
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+
 		if(!attack&&!Input.GetKey (KeyCode.LeftShift))
 		{
 			if(Input.GetMouseButton(0)&&!Input.GetKey (KeyCode.LeftShift))
