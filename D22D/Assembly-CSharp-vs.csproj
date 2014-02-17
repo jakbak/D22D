@@ -46,9 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ClickToMove.cs" />
      <Compile Include="Assets\Mob.cs" />
      <Compile Include="Assets\Projectile.cs" />
      <Compile Include="Assets\Soldier.cs" />
+     <None Include="Assets\ProperFuckingShaderGosh.shader" />
      <None Include="Assets\SkeletonData\animations.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>

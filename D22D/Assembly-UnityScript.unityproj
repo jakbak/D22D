@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ModularPlayer.js" />
+     <None Include="Assets\ProperFuckingShaderGosh.shader" />
      <None Include="Assets\SkeletonData\animations.txt" />
   </ItemGroup>
   <ItemGroup>
