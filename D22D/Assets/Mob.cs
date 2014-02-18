@@ -116,6 +116,7 @@ public class Mob : MonoBehaviour {
 	{
 		health = health - damage;
 
+		Debug.Log(health);
 		if(health<0)
 		{
 			health = 0;

@@ -22,7 +22,7 @@ public class ClickToMove : MonoBehaviour {
 
 		rotateMouse = true;
 
-		animation[run.name].speed = 1000;
+		animation[run.name].speed = speed/3;
 
 	}
 	
@@ -77,7 +77,6 @@ public class ClickToMove : MonoBehaviour {
 			controller.SimpleMove(transform.forward * speed);
 
 			animation.CrossFade(run.name);
-			animation[run.name].speed = speed/10;
 		}
 		else
 		{

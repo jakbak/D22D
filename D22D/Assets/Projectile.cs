@@ -5,6 +5,8 @@ public class Projectile : MonoBehaviour {
 
 	public int speed;
 	public int damage;
+	public float lifeTime;
+	public bool bDieOnCollision;
 	// Use this for initialization
 	void Start () {
 	
@@ -15,7 +17,7 @@ public class Projectile : MonoBehaviour {
 	{
 		transform.Translate (Vector3.forward*speed*Time.deltaTime);
 
-		Destroy (gameObject,3);
+		Destroy (gameObject,lifeTime);
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -23,7 +25,14 @@ public class Projectile : MonoBehaviour {
 		if(other.tag == "Enemy")
 		{
 			other.GetComponent<Mob>().getHit (damage);
+			if(bDieOnCollision)
+			{
 			Destroy (gameObject);
+			}
+			else
+			{
+
+			}
 		}
 		else
 		{
