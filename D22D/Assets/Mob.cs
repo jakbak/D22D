@@ -6,7 +6,10 @@ public class Mob : MonoBehaviour {
 	public int health;
 	public float speed;
 	public float range;
+	public float aggroRange;
 	public CharacterController controller;
+
+	public float projectileOffset;
 
 	public int damage;
 	public double impactTime = 0.5;
@@ -16,7 +19,11 @@ public class Mob : MonoBehaviour {
 	public AnimationClip die;
 	public AnimationClip attackClip;
 
+	public Transform deathReplacement;
 	private bool impacted;
+
+	public bool bIsRanged;
+	public Transform projectilePrefab;
 
 	public Transform player;
 	private Soldier opponent;
@@ -34,11 +41,15 @@ public class Mob : MonoBehaviour {
 	{
 		if(!isDead ())
 		{
-			if(!inRange())
+			if(!inRange() && inAggroRange())
 			{
 				chase ();
 			}
 			else
+			{
+				animation.CrossFade(idle.name);
+			}
+			if(inRange()) 
 			{
 				//animation.CrossFade(idle.name);
 				animation.Play(attackClip.name);
@@ -58,9 +69,18 @@ public class Mob : MonoBehaviour {
 
 	void attack()
 	{
-		if(animation[attackClip.name].time > animation[attackClip.name].length*impactTime && !impacted &&animation[attackClip.name].time<0.9*animation[attackClip.name].length)
+		if(animation[attackClip.name].time > animation[attackClip.name].length*impactTime && !impacted && animation[attackClip.name].time<0.9*animation[attackClip.name].length)
 		{
-			opponent.getHit(damage);
+
+			transform.LookAt(player.position);
+			if(bIsRanged)
+			{
+				Instantiate (projectilePrefab, new Vector3(transform.position.x, transform.position.y+projectileOffset, transform.position.z), transform.rotation);
+			}
+			else
+			{
+				opponent.getHit(damage);
+			}
 			impacted = true;
 		}
 	}
@@ -78,6 +98,19 @@ public class Mob : MonoBehaviour {
 		}
 	}
 
+	bool inAggroRange()
+	{
+		
+		if(Vector3.Distance (transform.position, player.position)<aggroRange)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	void chase()
 	{
 		transform.LookAt(player.position);
@@ -86,12 +119,15 @@ public class Mob : MonoBehaviour {
 	}
 	void dieMethod()
 	{
-		animation.CrossFade(die.name);
+		Destroy(gameObject);
+
+		//Transform dead = Instantiate (deathReplacement, transform.position, transform.rotation);
+		/** animation.CrossFade(die.name);
 
 		if(animation[die.name].time>0.9*animation[die.name].length)
 		{
 			Destroy (gameObject);
-		}
+		} **/
 	}
 
 	bool isDead()
@@ -116,7 +152,6 @@ public class Mob : MonoBehaviour {
 	{
 		health = health - damage;
 
-		Debug.Log(health);
 		if(health<0)
 		{
 			health = 0;

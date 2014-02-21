@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : MonoBehaviour {
+
+public class Player_Projectiles : MonoBehaviour {
 
 	public int speed;
 	public int damage;
 	public float lifeTime;
+	public string attackTag;
 	public bool bDieOnCollision;
 	// Use this for initialization
 	void Start () {
@@ -34,10 +36,5 @@ public class Projectile : MonoBehaviour {
 
 			}
 		}
-		else
-		{
-			Destroy(gameObject);
-		}
-
 	}
 }
